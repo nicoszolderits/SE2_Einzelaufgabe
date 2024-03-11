@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final Button sendButton = findViewById(R.id.send_button);
+        final Button calcButton = findViewById(R.id.calculate_button);
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Info", "Thread wurde erstellt");
                 networkThread.start();
                 Log.d("Info", "Thread wurde gestartet");
+            }
+        });
+
+        calcButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.d("Info", calcButton.getText() + " Button gedrückt");
+                calcMatrNr();
             }
         });
     }
