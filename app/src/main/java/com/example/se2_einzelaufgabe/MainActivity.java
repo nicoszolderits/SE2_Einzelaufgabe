@@ -1,6 +1,5 @@
 package com.example.se2_einzelaufgabe;
 
-import android.graphics.text.TextRunShaper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,11 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendToServer() {
         String matrNr = getMatrNrFromField();
-        Log.d("Input",matrNr);
 
         if(matrNr.isEmpty()) {
             Log.e("Info","Bitte geben sie eine Matrikelnummer ein");
@@ -79,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             writer.flush();
 
             String response = reader.readLine();
-            Log.d("Info", "response:"+response);
             writeToResponseField(response);
 
         } catch (Exception exc) {
