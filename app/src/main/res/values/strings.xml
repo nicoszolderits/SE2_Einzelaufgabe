@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SE2_Einzelaufgabe</string>
+    <string name="mainActivity_enterMatrikelNumber">Gib deine Matrikelnummer ein</string>
+    <string name="mainActivity_editTextHint">12210602</string>
+    <string name="mainActivity_serverResponse">Antwort vom Server</string>
+    <string name="mainActivity_buttonLabel_send">Abschicken</string>
 </resources>
