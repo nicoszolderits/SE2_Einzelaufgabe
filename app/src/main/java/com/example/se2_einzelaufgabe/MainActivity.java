@@ -2,7 +2,6 @@ package com.example.se2_einzelaufgabe;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +14,6 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,30 +26,24 @@ public class MainActivity extends AppCompatActivity {
         final Button sendButton = findViewById(R.id.send_button);
         final Button calcButton = findViewById(R.id.calculate_button);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("Info", sendButton.getText() + " Button gedrückt");
+        sendButton.setOnClickListener(v -> {
+            Log.d("Info", sendButton.getText() + " Button gedrückt");
 
-                Thread networkThread = new Thread() {
-                    @Override
-                    public void run() {
-                        sendToServer();
-                    }
-                };
+            Thread networkThread = new Thread() {
+                @Override
+                public void run() {
+                    sendToServer();
+                }
+            };
 
-                Log.d("Info", "Thread wurde erstellt");
-                networkThread.start();
-                Log.d("Info", "Thread wurde gestartet");
-            }
+            Log.d("Info", "Thread wurde erstellt");
+            networkThread.start();
+            Log.d("Info", "Thread wurde gestartet");
         });
 
-        calcButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Log.d("Info", calcButton.getText() + " Button gedrückt");
-                calcMatrNr();
-            }
+        calcButton.setOnClickListener(v -> {
+            Log.d("Info", calcButton.getText() + " Button gedrückt");
+            calcMatrNr();
         });
     }
 
@@ -59,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         String matrNr = getMatrNrFromField();
 
         if(matrNr.isEmpty()) {
-            Log.e("Info","Bitte geben sie eine Matrikelnummer ein");
+            Log.e("Error","Bitte geben sie eine Matrikelnummer ein");
             return;
         }
 
@@ -87,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             writeToResponseField(response);
 
         } catch (Exception exc) {
-            Log.d("Error", "MainActivity.createconnection" + exc.getMessage());
+            Log.e("Error", "MainActivity.createconnection" + exc.getMessage());
         }
     }
 
@@ -98,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("Info", "Connected to se2-submission.aau.at.");
             return socket;
         } catch (Exception exc) {
-            Log.d("Error", "MainActivity.connectSocket" + exc.getMessage());
+            Log.e("Error", "MainActivity.connectSocket" + exc.getMessage());
         }
         return null;
     }
@@ -115,11 +107,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void calcMatrNr(){
         String matNr = getMatrNrFromField();
-        char charArr[] = matNr.toCharArray();
+        char[] charArr = matNr.toCharArray();
 
         for(int i = 0; i < matNr.length(); i+=2){
             charArr[i] += 49;
         }
-        writeToResponseField(new String(charArr));
+        writeToResponseField("Berechnung Task 5: " + new String(charArr));
     }
 }
